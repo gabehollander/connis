@@ -1,0 +1,29 @@
+.bg {
+  margin-top: 30px;
+}
+.blog {
+  height: 800px;
+  background-color: lightblue;
+  margin:auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding:10px;
+  overflow: auto;
+}
+
+.blog-item {
+  height:300px;
+  background-color: green;
+  margin: auto;
+  margin-bottom:10px;
+}
+
+.blog-item-container {
+  margin-bottom: 10px;
+}
+
+.postForm {
+  margin: auto;
+  display: table;
+}

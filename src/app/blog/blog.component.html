@@ -1,0 +1,38 @@
+<div class="container bg">
+
+  <form *ngIf="auth.isAuthenticated()" class="postForm" #postForm="ngForm" (ngSubmit)="onSave(postForm.value)" novalidate>
+    <table border='1'>
+      <tr>
+        <td>title</td>
+        <td>
+          <input name="id" type="hidden" [(ngModel)]="id" >
+          <input name="title" type="text" required [(ngModel)]="name" >
+        </td>
+      </tr>
+      <tr>
+        <td>content</td>
+        <td>
+          <input name="content" type="text" required [(ngModel)]="content" >
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button>{{valButton}}</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <div class="row">
+    <div class="col-md-10 blog">
+
+      <div  *ngFor="let post of postData" class="col-md-10 blog-item">
+        <p>{{post.title}}</p>
+        <p>{{post.content}}</p>
+        <a *ngIf="auth.isAuthenticated()" (click)="delete(post._id)">Delete</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>

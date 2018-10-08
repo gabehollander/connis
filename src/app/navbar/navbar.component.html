@@ -1,0 +1,47 @@
+<div class="container bg">
+
+  <div class="row">
+    <div class="col-md-12 navbar">
+      <img class="logo" src="assets/connis_logo.png">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 tab-container">
+
+      <div class="route-container">
+        <!-- <span class="sm">*hear*</span> -->
+        <div class="route">
+          <img class="route-text" src="assets/hear.png">
+        </div>
+      </div>
+
+      <div class="route-container">
+        <!-- <span class="sm">*see*</span> -->
+        <div class="route">
+          <img class="route-text" src="assets/see.png">
+        </div>
+      </div>
+
+      <div class="route-container">
+        <!-- <span class="sm">*touch*</span> -->
+        <div class="route">
+          <img class="route-text" src="assets/touch.png">
+        </div>
+      </div>
+
+    </div>
+
+    <img class="mute" (click)="toggleSound()" *ngIf="isMuted" src="assets/mute.png">
+    <img class="mute" (click)="toggleSound()" *ngIf="!isMuted" src="assets/unmute.png">
+
+  </div>
+
+  <video autoplay muted loop id="myVideo">
+    <source src="assets/check_up_on_me.m4v" type="video/mp4">
+  </video>
+
+  <img (click)="toggleSound()" class="sound" *ngIf="isMuted" src="assets/mute.png">
+  <img (click)="toggleSound()" class="sound" *ngIf="!isMuted" src="assets/unmute.png">
+
+</div>

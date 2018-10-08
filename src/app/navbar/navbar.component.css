@@ -1,0 +1,66 @@
+.bg {
+  /* background-color: lightblue; */
+}
+
+#myVideo {
+    position: absolute;
+    top:0;
+    left:0;
+    height:150px;
+    width:100%;
+    object-fit: fill;
+    z-index: -1;
+}
+
+
+.logo {
+  height:100px;
+  margin:auto;
+}
+
+.navbar {
+  /* background-color: blue; */
+  height: 100px;
+  position:relative;
+}
+
+.tab-container {
+  /* background-color:lightblue; */
+  height: 50px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.route {
+  background-color: none;
+  height:100%;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.route-text {
+  vertical-align: -webkit-baseline-middle;
+  height:100%;
+  top: 10px;
+}
+
+.route-container {
+  height:100%;
+  width:100%;
+  text-align: center;
+
+}
+
+.sm {
+  font-size: 9px;
+  color: white;
+  visibility: hidden;
+}
+
+.mute {
+  height:30px;
+}
