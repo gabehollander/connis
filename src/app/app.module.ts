@@ -11,16 +11,17 @@ import { CommonService } from './common.service';
 import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
-import { BlogEditorComponent } from './blog-editor/blog-editor.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MusicComponent } from './music/music.component';
+
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
 
-  // {
-  //   path: 'heroes',
-  //   component: HeroListComponent,
-  //   data: { title: 'Heroes List' }
-  // },
+  {
+    path: 'music',
+    component: MusicComponent,
+  },
   { path: '',
     component: HomepageComponent,
   },
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     BlogComponent,
     HomepageComponent,
     LoginComponent,
-    BlogEditorComponent
+    MusicComponent
+
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ const appRoutes: Routes = [
     appRoutes,
     { enableTracing: true }),
     FormsModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
   providers: [CommonService],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 .bg {
-  /* background-color: lightblue; */
+  background-color: #e89312ba;
 }
 
 #myVideo {
@@ -9,13 +9,14 @@
     height:150px;
     width:100%;
     object-fit: fill;
-    z-index: -1;
+    z-index: 0;
 }
 
 
 .logo {
   height:100px;
   margin:auto;
+  z-index: 1;
 }
 
 .navbar {
@@ -31,6 +32,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  z-index: 1;
 }
 
 .route {
@@ -63,4 +65,5 @@
 
 .mute {
   height:30px;
+  z-index: 1;
 }

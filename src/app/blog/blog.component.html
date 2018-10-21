@@ -1,6 +1,6 @@
 <div class="container bg">
 
-  <form *ngIf="auth.isAuthenticated()" class="postForm" #postForm="ngForm" (ngSubmit)="onSave(postForm.value)" novalidate>
+  <form enctype="multipart/form-data" *ngIf="auth.isAuthenticated()" class="postForm" #postForm="ngForm" (ngSubmit)="onSave(postForm.value)" novalidate>
     <table border='1'>
       <tr>
         <td>title</td>
@@ -12,25 +12,53 @@
       <tr>
         <td>content</td>
         <td>
-          <input name="content" type="text" required [(ngModel)]="content" >
+          <!-- myFileInputField -->
+          <input name="content" type="file" (change)="onFileSelected($event)" required [(ngModel)]="content" >
+
+        </td>
+      </tr>
+      <tr>
+        <td>content2</td>
+        <td>
+          <!-- myFileInputField -->
+          <input name="content2" type="file" (change)="onFileSelected2($event)" required [(ngModel)]="content" >
+
+        </td>
+      </tr>
+
+      <tr>
+        <td>body text</td>
+        <td>
+          <!-- myFileInputField -->
+          <input name="bodyText" type="text" required [(ngModel)]="bodyText" >
+
         </td>
       </tr>
       <tr>
         <td colspan="2">
           <button>{{valButton}}</button>
+          <!-- <a (click)="toggleCreate()">Toggle</a> -->
+          <a (click)="edit(postData)">Edit</a>
         </td>
       </tr>
     </table>
   </form>
 
   <div class="row">
-    <div class="col-md-10 blog">
+    <div class="col-md-12 blog">
 
-      <div  *ngFor="let post of postData" class="col-md-10 blog-item">
-        <p>{{post.title}}</p>
-        <p>{{post.content}}</p>
-        <a *ngIf="auth.isAuthenticated()" (click)="delete(post._id)">Delete</a>
+      <button class="next" (click)="getNext()">Next</button>
+
+      <div class="col-md-12 blog-item">
+        <h1 class="blog-title">{{postData?.title}}</h1>
+        <img class="blog-img" src="{{getImage(postData.content)}}">
+        <img class="blog-img" src="{{getImage(postData.content2)}}">
+        <p class="body-text"> {{postData?.bodyText}}</p>
+        <a *ngIf="auth.isAuthenticated()" (click)="delete(postData._id)">Delete</a>
+        <!-- <a *ngIf="auth.isAuthenticated() && valButton==='Save'" (click)="edit(postData)">Edit</a> -->
       </div>
+
+      <button class="previous" (click)="getPrevious()">Previous</button>
 
     </div>
   </div>

@@ -22,6 +22,16 @@ export class CommonService {
       .map((response: Response) => response.json())
   }
 
+  getNextPost(id){
+    return this.http.post('http://localhost:8080/api/getNextPost',{'id': id})
+      .map((response: Response) => response.json())
+  }
+
+  getPreviousPost(id){
+    return this.http.post('http://localhost:8080/api/getPreviousPost',{'id': id})
+      .map((response: Response) => response.json())
+  }
+
   deletePost(id){
     return this.http.post('http://localhost:8080/api/deletePost/',{'id': id})
       .map((response: Response) => response.json())

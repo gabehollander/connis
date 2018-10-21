@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="col-md-12 navbar">
-      <img class="logo" src="assets/connis_logo.png">
+      <img routerLink="/" class="logo" src="assets/connis_logo.png">
     </div>
   </div>
 
@@ -12,7 +12,7 @@
       <div class="route-container">
         <!-- <span class="sm">*hear*</span> -->
         <div class="route">
-          <img class="route-text" src="assets/hear.png">
+          <img routerLink="/music" class="route-text" src="assets/hear.png">
         </div>
       </div>
 
@@ -37,11 +37,9 @@
 
   </div>
 
-  <video autoplay muted loop id="myVideo">
+  <video class="video" autoplay muted loop id="myVideo">
     <source src="assets/check_up_on_me.m4v" type="video/mp4">
   </video>
 
-  <img (click)="toggleSound()" class="sound" *ngIf="isMuted" src="assets/mute.png">
-  <img (click)="toggleSound()" class="sound" *ngIf="!isMuted" src="assets/unmute.png">
 
 </div>
