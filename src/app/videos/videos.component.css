@@ -1,0 +1,26 @@
+.video {
+  padding:25px;
+}
+
+.video-table {
+  margin: auto;
+  border-style: solid;
+  border-color: #003366;
+}
+
+.postForm {
+  margin: auto;
+  display: table;
+  margin-top: 30px;
+}
+
+.crumpled {
+  z-index: -100;
+  position: absolute;
+}
+
+tbody {
+  overflow: auto;
+  height: 800px;
+  display: block;
+}

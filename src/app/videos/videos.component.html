@@ -1,0 +1,36 @@
+<img class="crumpled" src="assets/crumpled_background.png">
+<div class="container bg">
+
+  <form enctype="multipart/form-data" *ngIf="auth.isAuthenticated()" class="postForm" #postForm="ngForm" (ngSubmit)="onSave(postForm.value)" novalidate>
+    <table border='1'>
+      <tr>
+        <td>embed</td>
+        <td>
+          <input name="id" type="hidden" [(ngModel)]="id" >
+          <input name="embed" type="text" required [(ngModel)]="embed" >
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <button>{{valButton}}</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <table class="video-table">
+    <tbody>
+      <div *ngFor="let post of postData; let i = index">
+<!-- 560315 -->
+        <iframe class="video" width="800" height="450"
+        [src]="getEmbedUrl(post)" frameborder="0"
+        allow=""
+        allowfullscreen>
+        </iframe>
+        <a *ngIf="auth.isAuthenticated()" (click)="delete(postData[i]._id)">Delete</a>
+
+      </div>
+    </tbody>
+  </table>
+</div>

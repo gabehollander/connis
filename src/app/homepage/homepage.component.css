@@ -1,5 +1,9 @@
 .bg {
-  background-color: #e89312ba;
   z-index: -1;
+}
+.crumpled {
+  position: absolute;
+  z-index: -1;
+  height: 1300px;
 }
 /* #e89312ba */

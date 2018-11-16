@@ -1,0 +1,26 @@
+<div class="container bg">
+  <div class="clothing-card">
+    <img class="clothing-item" src="assets/connis_clothing.jpg">
+    <div>
+      <select class="size-select">
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+      </select>
+      <span class="price">
+        $69
+      </span>
+      <img class="cart" src="assets/shopping_cart.png">
+    </div>
+  </div>
+  <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout">
+  <div class="form-row">
+    <label for="card-info">Card Info</label>
+    <div class="card-info" id="card-info" #cardInfo></div>
+
+    <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
+  </div>
+
+  <button type="submit">Pay $777</button>
+</form>
+</div>

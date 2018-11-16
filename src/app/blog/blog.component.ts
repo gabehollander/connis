@@ -27,9 +27,15 @@ export class BlogComponent implements OnInit {
   //content2, an img
   selectedFile2: File = null;
 
+  recentAlert = false;
+  oldestAlert = false;
+
   ngOnInit() {
     //get a post
-    this.newService.getPost().subscribe(data => this.postData = data)
+    this.newService.getPost().subscribe(data => {
+    this.postData = data
+    console.log(this.postData);
+  })
   }
 
   onSave = function(post, isValid: boolean) {
@@ -55,7 +61,6 @@ export class BlogComponent implements OnInit {
         }).then(data => {
           post.content2 = data;
           post.mode = this.valButton;
-          console.log(post);
 
           this.valButton = "Save";
           this.newService.savePost(post)
@@ -81,10 +86,15 @@ export class BlogComponent implements OnInit {
   }
 
   getNext = function() {
-    console.log(this.postData);
     this.newService.getNextPost(this.postData._id)
       .subscribe(data => {
-        if (data.length===0){}else{
+        if (data.length===0){
+          this.recentAlert = true;
+          setTimeout(() => {
+            this.recentAlert = false;
+          },3000);
+          //say its the most recent
+        }else{
           this.postData = data[0];
         }
       })
@@ -93,7 +103,13 @@ export class BlogComponent implements OnInit {
   getPrevious = function() {
     this.newService.getPreviousPost(this.postData._id)
     .subscribe(data => {
-      if (data.length===0){}else{
+      if (data.length===0){
+        this.oldestAlert = true;
+        setTimeout(() => {
+          this.oldestAlert = false;
+        },3000);
+        //say its the oldest
+      }else{
         this.postData = data[0];
       }
     })

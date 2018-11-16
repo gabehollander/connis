@@ -13,14 +13,25 @@ import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MusicComponent } from './music/music.component';
+import { VideosComponent } from './videos/videos.component';
+import { ClothingComponent } from './clothing/clothing.component';
 
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
-
+  {
+    path: 'login', 
+    component: LoginComponent },
   {
     path: 'music',
     component: MusicComponent,
+  },
+  {
+    path: 'videos',
+    component: VideosComponent,
+  },
+  {
+    path: 'clothing',
+    component: ClothingComponent,
   },
   { path: '',
     component: HomepageComponent,
@@ -36,7 +47,9 @@ const appRoutes: Routes = [
     BlogComponent,
     HomepageComponent,
     LoginComponent,
-    MusicComponent
+    MusicComponent,
+    VideosComponent,
+    ClothingComponent
 
   ],
   imports: [

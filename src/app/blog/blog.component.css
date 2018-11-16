@@ -3,7 +3,7 @@
 .blog {
   /* height: 800px; */
   margin-top: 30px;
-  background-color: #e89312ba;
+  background-color: #003366;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -15,22 +15,29 @@
   /* overflow: auto; */
 }
 
+@font-face {
+font-family: 'DrunkenSailor';
+src: url('../../assets/DrunkenSailor.ttf')  format('truetype');
+font-weight: bold;
+}
+
 .blog-img {
-  height:690px;
   width:480px;
   padding:10px;
   display: block;
   margin: auto;
 }
 
+
 .blog-title {
   text-align: center;
-  font-size: 60px;
-  color: #f3b559;
+  font-size: 100px;
+  color: black;
+  font-family: 'DrunkenSailor';
 }
 
 .blog-item {
-  background-color: #012258;
+  background-color: #e6e6e6;
   margin: auto;
   margin-bottom:10px;
   border-radius: 10px;
@@ -48,6 +55,7 @@
 
 .next {
   position: absolute;
+  height: 60px;
   right: 15px;
   margin: auto;
   top: 96%;
@@ -57,11 +65,13 @@
 
 .previous {
   position: absolute;
+  height: 60px;
   left: 15px;
   margin: auto;
   top: 96%;
   border-radius: 10px;
 }
+
 
 .body-text {
   color: #f3b559;

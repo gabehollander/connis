@@ -1,3 +1,4 @@
+
 <div class="container bg">
 
   <form enctype="multipart/form-data" *ngIf="auth.isAuthenticated()" class="postForm" #postForm="ngForm" (ngSubmit)="onSave(postForm.value)" novalidate>
@@ -47,18 +48,24 @@
   <div class="row">
     <div class="col-md-12 blog">
 
-      <button class="next" (click)="getNext()">Next</button>
+      <div class="next-container">
+        <span *ngIf="recentAlert" class="recent-alert">This is the most recent post!</span>
+        <img src="assets/next.png" class="next" (click)="getNext()">
+      </div>
 
       <div class="col-md-12 blog-item">
         <h1 class="blog-title">{{postData?.title}}</h1>
         <img class="blog-img" src="{{getImage(postData.content)}}">
         <img class="blog-img" src="{{getImage(postData.content2)}}">
         <p class="body-text"> {{postData?.bodyText}}</p>
-        <a *ngIf="auth.isAuthenticated()" (click)="delete(postData._id)">Delete</a>
+        <a class="postForm" *ngIf="auth.isAuthenticated()" (click)="delete(postData._id)">Delete</a>
         <!-- <a *ngIf="auth.isAuthenticated() && valButton==='Save'" (click)="edit(postData)">Edit</a> -->
       </div>
 
-      <button class="previous" (click)="getPrevious()">Previous</button>
+      <div class="previous-container">
+        <span *ngIf="oldestAlert" class="oldest-alert">This is the oldest post!</span>
+        <img src="assets/previous.png" class="previous" (click)="getPrevious()">
+      </div>
 
     </div>
   </div>

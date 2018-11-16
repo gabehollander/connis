@@ -1,0 +1,30 @@
+.postForm {
+  margin: auto;
+  display: table;
+  margin-top: 30px;
+}
+
+.blog-img {
+  height: 300px;
+  width: 300px;
+  margin: 25px;
+  border-style: solid;
+  border-color: #003366;
+}
+
+.table-row {
+  margin: auto;
+}
+
+.music-table {
+  margin: auto;
+}
+
+.container {
+  margin:auto;
+}
+
+.crumpled {
+  z-index: -100;
+  position: absolute;
+}

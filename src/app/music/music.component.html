@@ -1,3 +1,61 @@
-<div class="bg">
-  
+<img class="crumpled" src="assets/crumpled_background.png">
+<div class="container bg">
+
+  <form enctype="multipart/form-data" *ngIf="auth.isAuthenticated()" class="postForm" #postForm="ngForm" (ngSubmit)="onSave(postForm.value)" novalidate>
+    <table border='1'>
+      <tr>
+        <td>link</td>
+        <td>
+          <input name="id" type="hidden" [(ngModel)]="id" >
+          <input name="link" type="text" required [(ngModel)]="name" >
+        </td>
+      </tr>
+      <tr>
+        <td>content</td>
+        <td>
+          <!-- myFileInputField -->
+          <input name="content" type="file" (change)="onFileSelected($event)" required [(ngModel)]="content" >
+
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <button>{{valButton}}</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <table class="music-table">
+        <tbody>
+          <div *ngFor="let post of postData; let i = index">
+            <tr *ngIf="i % 3 == 0" class="table-row" >
+              <td>
+                <a href="{{post.link}}">
+                <img class="blog-img" src="{{getImage(post.content)}}">
+                </a>
+                <a *ngIf="auth.isAuthenticated()" (click)="delete(post._id)">Delete</a>
+              </td>
+              <td *ngIf="i + 1 < postData.length">
+                <a href="{{postData[i+1].link}}">
+                <img class="blog-img" src="{{getImage(postData[i+1].content)}}">
+                </a>
+                <a *ngIf="auth.isAuthenticated()" (click)="delete(postData[i+1]._id)">Delete</a>
+              </td>
+              <td *ngIf="i + 2 < postData.length">
+                <a href="{{postData[i+2].link}}">
+                <img class="blog-img" src="{{getImage(postData[i+2].content)}}">
+                </a>
+                <a *ngIf="auth.isAuthenticated()" (click)="delete(postData[i+2]._id)">Delete</a>
+              </td>
+            </tr>
+          </div>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

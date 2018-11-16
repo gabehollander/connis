@@ -12,6 +12,51 @@ export class CommonService {
 
   constructor(private http: Http) { }
 
+  //**********CHARGING THROUGH STRIPE*****************
+  createCharge(token){
+    return this.http.post('http://localhost:8080/api/createCharge',token)
+      .map((response: Response) => response.json())
+  }
+  //**************************************************
+
+  //***************VIDEO FUNCTIONS****************
+  saveVideo(post){
+    return this.http.post('http://localhost:8080/api/saveVideo',post)
+      .map((response: Response) => response.json())
+  }
+
+  getVideo(){
+    return this.http.get('http://localhost:8080/api/getVideo/')
+      .map((response: Response) => response.json())
+  }
+
+  deleteVideo(id){
+    return this.http.post('http://localhost:8080/api/deleteVideo/',{'id': id})
+      .map((response: Response) => response.json())
+  }
+  //**********************************************
+
+  //**************MUSIC FUNCTIONS*****************
+
+  saveMusic(post){
+    return this.http.post('http://localhost:8080/api/saveMusic',post)
+      .map((response: Response) => response.json())
+  }
+
+  getMusic(){
+    return this.http.get('http://localhost:8080/api/getMusic/')
+      .map((response: Response) => response.json())
+  }
+
+  deleteMusic(id){
+    return this.http.post('http://localhost:8080/api/deleteMusic/',{'id': id})
+      .map((response: Response) => response.json())
+  }
+
+  //************************************************
+
+  //********************BLOG FUNCTIONS***************
+
   savePost(post){
     return this.http.post('http://localhost:8080/api/savePost',post)
       .map((response: Response) => response.json())
@@ -36,4 +81,6 @@ export class CommonService {
     return this.http.post('http://localhost:8080/api/deletePost/',{'id': id})
       .map((response: Response) => response.json())
   }
+
+  //****************************************************
 }
