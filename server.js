@@ -6,7 +6,8 @@ var fs = require('fs');
 var stripe = require("stripe")("sk_test_o1dQoKZyV1apskA8oF6XYgy4");
 
 
-var db = mongo.connect("mongodb://localhost:27017/connis", function(err, response){
+// var db = mongo.connect("mongodb://localhost:27017/connis", function(err, response){
+var db = mongo.connect("mongodb://admin:titties69@ds155774.mlab.com:55774/connis", function(err, response){
   if(err){console.log(err);}
   else{console.log('Connected to ' + db, ' + ', response);}
 });
