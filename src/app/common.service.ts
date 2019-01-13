@@ -12,7 +12,19 @@ export class CommonService {
 
   constructor(private http: Http) { }
 
-  //**********CHARGING THROUGH STRIPE*****************
+  //***************CLOTHING FUNCTIONS*****************
+  deleteMerchandise(id){
+    return this.http.post('http://localhost:8080/api/deleteMerchandise/',{'id': id})
+      .map((response: Response) => response.json())
+  }
+  saveMerchandise(post){
+    return this.http.post('http://localhost:8080/api/saveMerchandise',post)
+      .map((response: Response) => response.json())
+  }
+  getMerchandise(){
+    return this.http.get('http://localhost:8080/api/getMerchandise/')
+      .map((response: Response) => response.json())
+  }
   createCharge(token){
     return this.http.post('http://localhost:8080/api/createCharge',token)
       .map((response: Response) => response.json())

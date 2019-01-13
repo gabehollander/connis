@@ -1,26 +1,106 @@
 <div class="container bg">
+
+  <form enctype="multipart/form-data" *ngIf="auth.isAuthenticated()" class="postForm" #postForm="ngForm" (ngSubmit)="onSave(postForm.value)" novalidate>
+    <table border='1'>
+      <tr>
+        <td>price</td>
+        <td>
+          <input name="id" type="hidden" [(ngModel)]="id" >
+          <input name="price" type="text" required [(ngModel)]="price" >
+        </td>
+      </tr>
+      <tr>
+        <td>content</td>
+        <td>
+          <!-- myFileInputField -->
+          <input name="content" type="file" (change)="onFileSelected($event)" required [(ngModel)]="content" >
+
+        </td>
+      </tr>
+      <tr>
+        <td>clothingDesc</td>
+        <td>
+          <!-- myFileInputField -->
+          <input name="clothingDesc" type="text" required [(ngModel)]="desc" >
+
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <button>{{valButton}}</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+
+<div *ngFor="let m of merchandise; let i = index">
+
   <div class="clothing-card">
-    <img class="clothing-item" src="assets/connis_clothing.jpg">
-    <div>
-      <select class="size-select">
+    <span>{{m.clothingDesc}}</span>
+    <img class="clothing-item" src="{{getImage(m.content)}}">
+    <div class="item-options">
+      <select class="size-select" [(ngModel)]="selectedSize">
         <option value="small">Small</option>
         <option value="medium">Medium</option>
         <option value="large">Large</option>
       </select>
       <span class="price">
-        $69
+        ${{m.price}}
       </span>
-      <img class="cart" src="assets/shopping_cart.png">
+      <img class="cart" (click)="addItem(m.price,m.clothingDesc,selectedSize)" src="assets/shopping_cart.png">
     </div>
   </div>
-  <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout">
-  <div class="form-row">
-    <label for="card-info">Card Info</label>
-    <div class="card-info" id="card-info" #cardInfo></div>
+  <a *ngIf="auth.isAuthenticated()" (click)="delete(m._id)">Delete</a>
 
-    <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
+</div>
+
+<div class="sticky-checkout">
+  <form>
+    <table border='1'>
+      <tr>
+        <td>Name</td>
+        <td>
+          <input name="id" type="hidden" [(ngModel)]="id" >
+          <input name="name" type="text" required [(ngModel)]="name" >
+        </td>
+      </tr>
+      <tr>
+        <td>Street</td>
+        <td>
+          <input name="street" type="text" required [(ngModel)]="street" >
+        </td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td>
+          <input name="city" type="text" required [(ngModel)]="city" >
+        </td>
+      </tr>
+      <tr>
+        <td>Zip Code</td>
+        <td>
+          <input name="zip" type="text" required [(ngModel)]="zip" >
+        </td>
+      </tr>
+    </table>
+  </form>
+  <div *ngFor="let c of cart; let i = index">
+    <span>{{c.item}}</span>
+    <span>{{c.size}}</span>
+    <span (click)="removeItem(i,c)">Remove Item</span>
   </div>
+  <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout">
+    <div class="form-row">
+      <label for="card-info">Card Info</label>
+      <div class="card-info" id="card-info" #cardInfo></div>
 
-  <button type="submit">Pay $777</button>
-</form>
+      <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <button type="submit">${{cartTotal}}</button>
+  </form>
+</div>
+
 </div>

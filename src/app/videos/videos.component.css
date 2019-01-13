@@ -19,7 +19,7 @@
   position: absolute;
 }
 
-tbody {
+.video-table-body {
   overflow: auto;
   height: 800px;
   display: block;

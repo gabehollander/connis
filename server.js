@@ -3,6 +3,7 @@ var path = require("path");
 var bodyParser = require('body-parser');
 var mongo = require("mongoose");
 var fs = require('fs');
+var stripe = require("stripe")("sk_test_o1dQoKZyV1apskA8oF6XYgy4");
 
 
 var db = mongo.connect("mongodb://localhost:27017/connis", function(err, response){
@@ -35,22 +36,179 @@ var Schema = mongo.Schema;
 
 var BlogSchema = new Schema({
   title: { type: String },
-  // content: { data: Buffer, contentType: String },
   content: { type: String },
   content2: { type: String },
   bodyText: { type: String }
 
 },{versionKey: false });
 
+var MusicSchema = new Schema({
+  link: { type: String },
+  content: { type: String },
+
+},{versionKey: false });
+
+var VideosSchema = new Schema({
+  embed: { type: String },
+
+},{versionKey: false });
+
+var ClothingSchema = new Schema({
+  content: { type: String },
+  price: { type: String },
+  clothingDesc: {type: String},
+  isAvailable: { type: Boolean },
+
+},{versionKey: false });
+
 var model = mongo.model('blog', BlogSchema, 'blog');
+var musicModel = mongo.model('music', MusicSchema, 'music');
+var videosModel = mongo.model('videos', VideosSchema, 'videos');
+var clothingModel = mongo.model('clothing',ClothingSchema, 'clothing');
 
-var currentID;
+//**********CLOTHING FUNCTIONS*****************
 
+app.get("/api/getMerchandise", function(req,res){
+  clothingModel.find({},function(err,data){
+    if(err){
+      res.send(err);
+    }
+    else{
+      res.send(data);
+    }
+  });
+})
+
+app.post("/api/saveMerchandise",function(req,res){
+  var mod = new clothingModel(req.body);
+
+  if(req.body.mode == "Save"){
+
+    mod.save(function(err,data){
+      if(err){
+        res.send(err);
+      }
+      else{
+        res.send({data:"Clothing has been added!"});
+      }
+    });
+
+  }
+})
+
+app.post("/api/deleteMerchandise",function(req,res){
+  clothingModel.remove({_id: req.body.id}, function(err){
+    if(err){
+      res.send(err);
+    }
+    else{
+      res.send({data:"Clothing has been Deleted!"});
+    }
+  });
+})
+
+app.post("/api/createCharge", function(req,res){
+  const token = req.body.id;
+
+  const charge = stripe.charges.create({
+    amount: 100,
+    currency: 'usd',
+    description: 'Example charge',
+    source: token,
+  });
+})
+//**************************************************
+
+//**************VIDEOS FUNCTIONS********************
+
+app.get("/api/getVideo", function(req,res){
+  videosModel.find({},function(err,data){
+    if(err){
+      res.send(err);
+    }
+    else{
+      res.send(data);
+    }
+  });
+})
+
+app.post("/api/saveVideo",function(req,res){
+  var mod = new videosModel(req.body);
+
+  if(req.body.mode == "Save"){
+
+    mod.embed = req.body.embed;
+    mod.save(function(err,data){
+      if(err){
+        res.send(err);
+      }
+      else{
+        res.send({data:"Post has been added!"});
+      }
+    });
+
+  }
+})
+
+app.post("/api/deleteVideo",function(req,res){
+  console.log(req);
+  videosModel.remove({_id: req.body.id}, function(err){
+    if(err){
+      res.send(err);
+    }
+    else{
+      res.send({data:"Post has been Deleted!"});
+    }
+  });
+})
+//**************************************************
+//**************MUSIC FUNCTIONS*********************
+app.get("/api/getMusic", function(req,res){
+  musicModel.find({},function(err,data){
+    if(err){
+      res.send(err);
+    }
+    else{
+      res.send(data);
+    }
+  });
+})
+
+app.post("/api/saveMusic",function(req,res){
+  var mod = new musicModel(req.body);
+
+  if(req.body.mode == "Save"){
+
+    mod.link = req.body.link;
+    mod.content = req.body.content;
+    mod.save(function(err,data){
+      if(err){
+        res.send(err);
+      }
+      else{
+        res.send({data:"Post has been added!"});
+      }
+    });
+
+  }
+})
+
+app.post("/api/deleteMusic",function(req,res){
+  musicModel.remove({_id: req.body.id}, function(err){
+    if(err){
+      res.send(err);
+    }
+    else{
+      res.send({data:"Post has been Deleted!"});
+    }
+  });
+})
+//**************************************************
+
+//**************BLOG FUNCTIONS**********************
 app.post("/api/savePost",function(req,res){
   var mod = new model(req.body);
 
-  console.log(req.title);
-  console.log(req.bodyText);
   if(req.body.mode == "Save"){
 
     mod.title = req.body.title;
@@ -68,7 +226,7 @@ app.post("/api/savePost",function(req,res){
 
   }
   else{
-    model.findByIdAndUpdate(req.body.id, { title: req.body.title, content: req.body.content, content2: req.body.content2},
+    model.findByIdAndUpdate(req.body.id, { title: req.body.title, content: req.body.content, content2: req.body.content2, bodyText: req.body.bodyText},
     function(err,data){
       if(err) {
         res.send(err);
@@ -92,20 +250,19 @@ app.post("/api/deletePost",function(req,res){
 })
 
 app.get("/api/getPost", function(req,res){
-  model.findOne({},function(err,data){
+  // model.findOne({},function(err,data){
+  model.find().sort({_id: -1}).limit(1).exec(function(err,data){
     if(err){
       res.send(err);
     }
     else{
-      res.send(data);
+      res.send(data[0]);
     }
   });
 })
 
 app.post("/api/getNextPost", function(req,res){
-  // var current = model.find({"_id":req.body.id});
   var data = model.find({_id: {$gt: req.body.id}}).sort({_id: 1}).limit(1).exec(function(err,data){
-    // console.log(data[0].title);
     if(err){
       res.send(err);
     }
@@ -116,10 +273,8 @@ app.post("/api/getNextPost", function(req,res){
 })
 
 app.post("/api/getPreviousPost", function(req,res){
-  // var current = model.findOne(req.body.id);
   var data = model.find({_id: {$lt: req.body.id}}).sort({_id: -1}).limit(1).exec(function(err,data){
-  // model.findOne({date: {$lt: current.date}}, {}, {sort: {date: -1}},function(err,data){
-    // console.log(data[0].title);
+
     if(!data){
       res.send(err);
     }
@@ -128,6 +283,8 @@ app.post("/api/getPreviousPost", function(req,res){
     }
   });
 })
+
+//***********************************************
 
 app.listen(8080, function () {
   console.log('app listening on port 8080...')
