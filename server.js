@@ -21,12 +21,13 @@ app.use(bodyParser());
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(function (req, res, next){
-  // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
+app.use(express.static(__dirname + '/dist'));
 
 var Schema = mongo.Schema;
 
@@ -66,6 +67,7 @@ var model = mongo.model('blog', BlogSchema, 'blog');
 var musicModel = mongo.model('music', MusicSchema, 'music');
 var videosModel = mongo.model('videos', VideosSchema, 'videos');
 var clothingModel = mongo.model('clothing',ClothingSchema, 'clothing');
+
 
 //**********CLOTHING FUNCTIONS*****************
 
@@ -286,6 +288,7 @@ app.post("/api/getPreviousPost", function(req,res){
 })
 
 //***********************************************
+
 
 app.listen(process.env.PORT || 8080, function () {
   console.log('app listening on port 8080...')
