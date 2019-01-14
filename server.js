@@ -287,6 +287,6 @@ app.post("/api/getPreviousPost", function(req,res){
 
 //***********************************************
 
-app.listen(8080, function () {
+app.listen(process.env.PORT || 8080, function () {
   console.log('app listening on port 8080...')
 })
