@@ -19,9 +19,10 @@ app.use(express.json({limit: '50mb'}));
 app.use(bodyParser());
 // app.use(bodyParser.json({limit:'10mb'}));
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static(__dirname + '/dist/connis'));
 
 app.use(function (req, res, next){
-  res.setHeader('Access-Control-Allow-Origin', 'https://connis.herokuapp.com/');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
