@@ -9,10 +9,10 @@
 .login-button {
   position: absolute;
   left: 0px;
-  bottom: 0px;
+  top: 0px;
   display: none;
 }
-.login-button:hover {
+.login-button button:hover {
   display: inline;
 }
 /* #e89312ba */
