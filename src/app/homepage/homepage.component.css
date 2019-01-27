@@ -10,5 +10,10 @@
   position: absolute;
   left: 0px;
   bottom: 0px;
+  display: none;
+}
+.login-button:hover {
+    display: inline;
+}
 }
 /* #e89312ba */
