@@ -10,9 +10,9 @@
   position: absolute;
   left: 0px;
   top: 0px;
-  display: none;
+  visibility: hidden;
 }
 .login-button button:hover {
-  display: inline;
+  visibility: visible;
 }
 /* #e89312ba */
