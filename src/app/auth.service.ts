@@ -14,7 +14,7 @@ export class AuthService {
     clientID: 'YELF9yqA9YOan8wDSS3o5GlI6SdTjQzY',
     domain: 'connis.auth0.com',
     responseType: 'token id_token',
-    redirectUri: 'http://localhost:4200',
+    redirectUri: 'http://www.connis.us/#/',
     scope: 'openid'
   });
 
