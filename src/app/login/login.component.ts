@@ -9,7 +9,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
 
   constructor( public auth: AuthService ){
-    auth.handleAuthenticationWithHash();
+    auth.handleAuthentication();
   }
 
   ngOnInit() {

@@ -19,7 +19,7 @@ import { ClothingComponent } from './clothing/clothing.component';
 
 const appRoutes: Routes = [
   {
-    path: 'login', 
+    path: 'login',
     component: LoginComponent },
   {
     path: 'music',
@@ -56,8 +56,7 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(
     appRoutes,
-    { enableTracing: true,
-    useHash:true }),
+    { enableTracing: true}),
     FormsModule,
     HttpModule,
     HttpClientModule
