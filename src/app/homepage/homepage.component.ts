@@ -12,7 +12,7 @@ import { AuthService } from '../auth.service';
 export class HomepageComponent implements OnInit {
 
   constructor(private newService: CommonService, public auth: AuthService){
-    auth.handleAuthentication();
+    auth.handleAuthenticationWithHash();
   }
 
   postData;

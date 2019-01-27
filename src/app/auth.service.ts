@@ -37,6 +37,30 @@ export class AuthService {
     });
   }
 
+  // Call this method in app.component.ts
+  // if using hash-based routing
+  public handleAuthenticationWithHash(): void {
+    this
+      .router
+      .events
+      .pipe(
+        filter(event => event instanceof NavigationStart),
+        filter((event: NavigationStart) => (/access_token|id_token|error/).test(event.url))
+      )
+      .subscribe(() => {
+        this.lock.resumeAuth(window.location.hash, (err, authResult) => {
+          if (err) {
+            this.router.navigate(['/']);
+            console.log(err);
+            alert(`Error: ${err.error}. Check the console for further details.`);
+            return;
+          }
+          this.setSession(authResult);
+          this.router.navigate(['/']);
+        });
+    });
+  }
+
   private setSession(authResult): void {
     // Set the time that the Access Token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
